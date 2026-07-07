@@ -8,9 +8,13 @@ Implementação do algoritmo de compressão de Huffman em C, incluindo:
 
 ## Estrutura do Projeto
 projeto_huffman/
+
 ├── huffman_heap.h # Header com as declarações
+
 ├── huffman_heap.c # Implementação do TAD
+
 ├── main.c # Programa de teste
+
 └── README.md # Documentação
 
 ## Como Compilar
