@@ -1,0 +1,39 @@
+# Arquivos compilados
+*.o
+*.exe
+*.out
+a.out
+huffman.exe
+huffman
+
+# Arquivos de debug
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Pastas de build
+build/
+bin/
+obj/
+Debug/
+Release/
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+*.user
+*.suo
+*.sdf
+*.opensdf
+*.opendb
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Arquivos temporários
+*~
+*.bak
