@@ -20,4 +20,5 @@ projeto_huffman/
 ## Como Compilar
 
 gcc -Wall -g main.c huffman_heap.c -o huffman
+
 ./huffman
