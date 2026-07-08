@@ -37,4 +37,8 @@ void liberaFilaPrioridade(FilaPrioridade* fila);
 
 void imprimeFila(FilaPrioridade* fila);
 
+// Funções de: Contagem e Construção da Árvore
+bool contaFrequenciasArquivo(const char* nomeArquivo, int* frequencias);
+NoHuffman* constroiArvoreHuffman(int* frequencias);
+
 #endif // HUFFMAN_HEAP_H

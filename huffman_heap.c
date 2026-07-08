@@ -219,3 +219,64 @@ void imprimeFila(FilaPrioridade* fila) {
         }
     }
 }
+/*
+ ============================================================================
+ CONTAGEM DE FREQUÊNCIAS E ÁRVORE
+ ============================================================================
+ */
+
+bool contaFrequenciasArquivo(const char* nomeArquivo, int* frequencias) {
+    // 1. Inicializa o array de frequências com zeros
+    for (int i = 0; i < 256; i++) {
+        frequencias[i] = 0;
+    }
+    
+    // 2. Abre o arquivo em modo leitura de texto ("r")
+    FILE* arquivo = fopen(nomeArquivo, "r");
+    if (arquivo == NULL) {
+        fprintf(stderr, "ERRO: Nao foi possivel abrir o arquivo %s\n", nomeArquivo);
+        return false;
+    }
+    
+    int c;
+    while ((c = fgetc(arquivo)) != EOF) {
+        frequencias[c]++;
+    }
+    
+    fclose(arquivo);
+    return true;
+}
+
+NoHuffman* constroiArvoreHuffman(int* frequencias) {
+    // Cria uma fila de prioridade com capacidade máxima de 256 (total de caracteres ASCII)
+    FilaPrioridade* fila = criaFilaPrioridade(256);
+    if (fila == NULL) return NULL;
+    
+    // 1. Transforma os caracteres encontrados em nós folha e insere na Min-Heap
+    for (int i = 0; i < 256; i++) {
+        if (frequencias[i] > 0) {
+            NoHuffman* no = criaNohHuffman((char)i, frequencias[i], NULL, NULL);
+            insere(fila, no);
+        }
+    }
+    
+    while (tamanhoFila(fila) > 1) {
+        NoHuffman* menor1 = removeMenor(fila);
+        NoHuffman* menor2 = removeMenor(fila);
+        
+        int somaFreq = menor1->frequencia + menor2->frequencia;
+        
+        // Cria um nó interno (indicado pelo caractere '\0')
+        NoHuffman* novoPai = criaNohHuffman('\0', somaFreq, menor1, menor2);
+        
+        insere(fila, novoPai);
+    }
+    
+    // 3. O último nó que sobra na fila é a raiz da Árvore de Huffman completa
+    NoHuffman* raiz = removeMenor(fila);
+    
+    // A árvore está construída, podemos limpar a estrutura da fila da memória
+    liberaFilaPrioridade(fila);
+    
+    return raiz;
+}
