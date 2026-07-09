@@ -1,5 +1,6 @@
 #include "huffman_heap.h"
 #include <string.h>
+#include "compressor.h"
 
 void imprimeArvoreInOrder(NoHuffman* raiz, int nivel) {
     if (raiz == NULL) {
@@ -90,5 +91,21 @@ int main() {
     liberaNohHuffman(raiz);
     printf("\nMemoria liberada. Teste concluido com sucesso!\n");
     
+
+    /* Teste completo: comprime e descomprime o arquivo de verdade */
+    printf("\n=== TESTE DE COMPRESSAO COMPLETA ===\n");
+
+    if (comprimeArquivo("texto_teste.txt", "texto_teste.huff")) {
+        printf("Arquivo comprimido com sucesso: texto_teste.huff\n");
+    } else {
+        printf("ERRO ao comprimir o arquivo.\n");
+    }
+
+    if (descomprimeArquivo("texto_teste.huff", "texto_teste_saida.txt")) {
+        printf("Arquivo descomprimido com sucesso: texto_teste_saida.txt\n");
+    } else {
+        printf("ERRO ao descomprimir o arquivo.\n");
+    }
+
     return 0;
 }
