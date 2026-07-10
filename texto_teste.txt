@@ -1,0 +1,1 @@
+Texto teste de Huffman. Compressao de dados eh um tópico classico de Estrutura de Dados 2, eba.
